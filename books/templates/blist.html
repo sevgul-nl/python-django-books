@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<ul class="list-group">
+  {% for item in list %}
+  <li class="list-group-item">
+      <span class="text-info">Title: </span> <span>{{ item.book.title }}</span>
+      <br>
+       {% if item.book.authors %}
+           {% for author in item.book.authors.iterator %}
+                <span class="text-info">Author: </span><span>{{ author.name }}</span>
+               <br>
+            {% endfor %}
+
+      {% endif %}
+      <span class="text-info">Rating: </span><span class="badge badge-primary badge-pill">{{ item.brating }}</span>
+      <br>
+      <span class="text-info">Number of reviews: </span><span>{{ item.nreviews }}</span>
+      <br>
+      {% if item.brating is not null %}
+      <span class="text-secondary">Write the first review for this book.</span>
+      <br>
+      {% endif %}
+      <a class="btn btn-primary btn-sm active" role="button" aria-pressed="true" href="/pybooks/book/{{ item.book.id }}/">Reviews</a></li>
+  </li>
+  {% endfor %}
+
+</ul>
+{% endblock %}
